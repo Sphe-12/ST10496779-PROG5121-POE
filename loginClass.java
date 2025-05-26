@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 
 public class loginClass {
     private final String username;
@@ -43,6 +43,46 @@ public class loginClass {
             return "Login successful!";
         } else {
             return "Login failed! Please check your username and password.";
+        }
+    }
+
+    public static void main(String[] args) {
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.println("Please enter a username: ");
+            String username = sc.next();
+
+            System.out.println("Please enter a password: ");
+            String password = sc.next();
+
+            System.out.println("Please enter your cellphone number: ");
+            String cellNumber = sc.next();
+
+            System.out.println("Please enter your first name: ");
+            String firstName = sc.next();
+
+            System.out.println("Please enter your surname: ");
+            String surname = sc.next();
+
+            loginClass accountService = new loginClass(username, password, cellNumber, firstName, surname);
+
+            String result = accountService.registerUser();
+            System.out.println(result);
+
+            if (result.startsWith("Welcome")) {
+                System.out.println("\n=== LOGIN ===");
+                System.out.print("Enter your username: ");
+                String loginUsername = sc.next();
+
+                System.out.print("Enter your password: ");
+                String loginPassword = sc.next();
+
+                boolean loginSuccess = accountService.loginUser(loginUsername, loginPassword);
+                if (loginSuccess) {
+                    System.out.println("Login successful!");
+                } else {
+                    System.out.println("Login failed! Please check your username and password.");
+                }
+            }
         }
     }
 }
